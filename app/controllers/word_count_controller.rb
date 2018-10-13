@@ -14,10 +14,11 @@ class WordCountController < ApplicationController
     @character_count_with_spaces = @text.length
 
     @character_count_without_spaces = @text.length-@text.split.count+1
-
-    arr=@text.split
-   
-    @occurrences = arr.count(@special_word)
+    
+    inttext=@text.downcase
+    arr=inttext.split
+    spec=@special_word.downcase
+    @occurrences = arr.count(spec)
 
     # ================================================================================
     # Your code goes above.
