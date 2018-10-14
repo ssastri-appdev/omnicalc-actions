@@ -33,12 +33,19 @@ class StatsController < ApplicationController
     @sum = sort_arr.sum
 
     @mean = @sum/@count.to_f
+    ave=@mean
     
     # Variance
     
-     i=0
-     var=0
+
+     diff_arr= [] #create an empty array to measure difference b/w original number and variance whole squared
      
+     sort_arr.each do |num|
+         sq_diff=((num-ave)**2) #calculating square of difference
+         diff_arr.push(sq_diff) #Pushing the difference values into diff_arr
+     end
+     
+     @variance=diff_arr.sum/@count.to_f
     
     #while(i<len)
      #var=var+(sort_arr[i]-@mean)**2
@@ -46,14 +53,39 @@ class StatsController < ApplicationController
     #end
     # ========
 
-    #@variance = v
 
-    @standard_deviation = "Replace this string with your answer"
+    @standard_deviation = (@variance)**0.5
 
     # Mode
+    
+    max=1
+    ctr=1
+    i=1
+    mode_temp=sort_arr[0]
+    
+    while(i<len)
+        if(sort_arr[i]==sort_arr[i-1])
+            ctr=ctr+1
+            i=i+1
+        elsif(max<ctr)
+            max=ctr
+            mode_temp=sort_arr[i-1]
+            ctr=1
+            i=i+1
+        else
+            ctr=1
+            i=i+1
+        end
+    end
+    
+    if(max<ctr)
+        @mode=sort_arr[len-1]
+    else
+        @mode=mode_temp
+    end
     # ====
 
-    @mode = "Replace this string with your answer"
+    
 
     # ================================================================================
     # Your code goes above.
