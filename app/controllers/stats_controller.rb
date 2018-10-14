@@ -6,30 +6,47 @@ class StatsController < ApplicationController
     # Your code goes below.
     # The numbers the user input are in the array @numbers.
     # ================================================================================
+    
+    @sorted_numbers = @numbers.sort
+    sort_arr=@sorted_numbers
+    
+    @count = @numbers.count
 
-    @sorted_numbers = "Replace this string with your answer"
+    @minimum = @numbers.min
 
-    @count = "Replace this string with your answer"
+    @maximum = @numbers.max
 
-    @minimum = "Replace this string with your answer"
+    @range = @maximum-@minimum
 
-    @maximum = "Replace this string with your answer"
-
-    @range = "Replace this string with your answer"
-
+    len=@count
     # Median
+    
+   if(len %2==1)
+      mid=sort_arr.at(len/2)
+      else
+       mid=0.5*sort_arr.at(len/2)+ 0.5*sort_arr.at((len/2)-1)
+    end  
+   
     # ======
 
-    @median = "Replace this string with your answer"
+    @median = mid
+    @sum = sort_arr.sum
 
-    @sum = "Replace this string with your answer"
-
-    @mean = "Replace this string with your answer"
-
+    @mean = @sum/@count.to_f
+    
     # Variance
+    
+     i=0
+     var=0
+     
+    
+    #while(i<len)
+     #var=var+(sort_arr[i]-@mean)**2
+      #i=i+1
+    #end
     # ========
 
-    @variance = "Replace this string with your answer"
+    #@variance = v
 
     @standard_deviation = "Replace this string with your answer"
 
